@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 import csv
 PATH = 'raw'
 
@@ -58,7 +58,15 @@ writer.write(header)
 writer.write("var wardrobe = [\n")
 for f in fileorder:
   out = process(f, files[f][0], files[f][1], files[f][2])
-  for key in out:
+
+  keys = ['发型','连衣裙','外套','上装','下装','袜子','鞋子','饰品-头饰','饰品-耳饰','饰品-颈饰','饰品-手饰','饰品-手持','饰品-腰饰','饰品-特殊','饰品-','妆容']
+  for k in out:
+    if k not in keys:
+      keys.append(k)
+
+  for key in keys:
+    if key not in out:
+      continue
     for row in out[key]:
       if key not in category:
         category.append(key)
